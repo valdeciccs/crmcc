@@ -11,11 +11,13 @@ const AREAS = [
   { chave: "usuarios", rotulo: "Usuários", href: "/usuarios", soAdmin: true },
 ];
 
-export default function Shell({ sessao, atual, titulo, apoio, children }) {
+// "acao" é opcional: um botão que fica na mesma linha do título da área.
+// "alturaCheia" prende a tela na altura da janela, para ela não rolar.
+export default function Shell({ sessao, atual, titulo, apoio, acao, alturaCheia, children }) {
   const areas = AREAS.filter((area) => !area.soAdmin || sessao.papel === "admin");
 
   return (
-    <div className="shell">
+    <div className={`shell ${alturaCheia ? "altura-fixa" : ""}`}>
       <header className="cabecalho">
         <span className="marca">Meu CRM</span>
 
@@ -46,7 +48,10 @@ export default function Shell({ sessao, atual, titulo, apoio, children }) {
 
       <main className="conteudo">
         <div className="conteudo-interno">
-          <h1 className="titulo-area">{titulo}</h1>
+          <div className="cabecalho-area">
+            <h1 className="titulo-area">{titulo}</h1>
+            {acao}
+          </div>
           <p className="apoio-area">{apoio}</p>
           {children}
         </div>

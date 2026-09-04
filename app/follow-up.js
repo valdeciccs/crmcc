@@ -40,6 +40,8 @@ export default function FollowUp({ contato, gerarAoAbrir = false }) {
 
       {!gerando && estado.erro && <p className="erro-campo">{estado.erro}</p>}
 
+      {!gerando && estado.aviso && <p className="erro-campo">{estado.aviso}</p>}
+
       {!gerando && estado.mensagem && (
         <div className="cartao mensagem-ia">
           <p className="texto-anotacao">{estado.mensagem}</p>

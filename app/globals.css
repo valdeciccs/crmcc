@@ -512,7 +512,8 @@ select.campo option {
   background: var(--fundo);
 }
 
-.lista-anotacoes {
+.lista-anotacoes,
+.lista-followups {
   margin: 0 0 24px;
   padding: 0;
   list-style: none;
@@ -521,12 +522,14 @@ select.campo option {
   border-radius: var(--raio);
 }
 
-.lista-anotacoes li {
+.lista-anotacoes li,
+.lista-followups li {
   padding: 16px 18px;
   border-bottom: 1px solid var(--borda);
 }
 
-.lista-anotacoes li:last-child {
+.lista-anotacoes li:last-child,
+.lista-followups li:last-child {
   border-bottom: none;
 }
 
@@ -633,4 +636,397 @@ select.campo option {
   font-size: 15px;
   text-align: center;
   color: var(--texto-apoio);
+}
+
+/* --- Página do contato --- */
+
+/* Na lista, o nome é a porta de entrada da página do contato */
+.nome-contato {
+  font-weight: 700;
+  color: var(--texto);
+  text-decoration: none;
+}
+
+.nome-contato:hover {
+  color: var(--destaque);
+  text-decoration: underline;
+}
+
+/* Busca da área de Contatos */
+.busca-contatos {
+  max-width: 420px;
+  margin-bottom: 20px;
+}
+
+.resultado-busca {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--texto-apoio);
+}
+
+/* Volta para a lista, no alto da página do contato */
+.link-voltar {
+  display: inline-block;
+  margin-bottom: 20px;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.link-voltar:hover {
+  text-decoration: underline;
+}
+
+/* Ficha do topo: email, telefone e etapa */
+.ficha {
+  max-width: 640px;
+  padding: 6px 24px;
+}
+
+.ficha-linha {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--borda);
+}
+
+.ficha-linha:last-child {
+  border-bottom: none;
+}
+
+.ficha-rotulo {
+  flex: 0 0 92px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--texto-apoio);
+}
+
+/* Anotações e follow-ups, uma seção embaixo da outra */
+.secao {
+  margin-top: 44px;
+}
+
+.secao-titulo {
+  margin: 0 0 18px;
+  font-size: 16px;
+}
+
+.lista-followups {
+  max-width: 640px;
+  margin: 20px 0 0;
+}
+
+/* --- Título da área, com espaço para um botão ao lado --- */
+.cabecalho-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* Botão que é link precisa do que a tag <a> não dá de graça */
+a.botao {
+  display: inline-block;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+a.botao:hover {
+  color: var(--sobre-destaque);
+}
+
+/* --- Kanban do funil --- */
+/* As colunas ficam lado a lado, cada uma com a altura dos próprios cartões */
+.kanban {
+  display: flex;
+  align-items: flex-start;
+  flex: 1;
+  min-height: 0;
+  gap: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 10px;
+}
+
+/* A coluna se ajusta entre 260 e 320px: não estica para encher a tela nem
+   encolhe a ponto de ficar ilegível. Não cabendo, o quadro rola de lado. */
+.coluna {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 260px;
+  min-width: 260px;
+  max-width: 320px;
+  min-height: 0;
+  /* Enche de cartão: para de crescer na altura da janela e rola por dentro */
+  max-height: 100%;
+  padding: 16px;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+}
+
+/* Cartões demais numa coluna rolam dentro dela, não na tela inteira */
+.cartoes {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* A coluna onde o cartão vai cair */
+.coluna-alvo {
+  border-color: var(--destaque);
+}
+
+.topo-coluna {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.ponto-etapa {
+  flex-shrink: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.nome-coluna {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--texto);
+}
+
+.contagem-coluna {
+  font-size: 13px;
+  color: var(--texto-apoio);
+}
+
+.cartao-contato {
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  background: var(--elevado);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  cursor: grab;
+}
+
+.cartao-contato:last-child {
+  margin-bottom: 0;
+}
+
+.cartao-contato.arrastando {
+  opacity: 0.4;
+  cursor: grabbing;
+}
+
+.nome-cartao,
+.nome-recente {
+  font-weight: 700;
+  color: var(--texto);
+  text-decoration: none;
+}
+
+.nome-cartao:hover,
+.nome-recente:hover {
+  color: var(--destaque);
+  text-decoration: underline;
+}
+
+.email-cartao {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--texto-apoio);
+  overflow-wrap: anywhere;
+}
+
+.tempo-cartao {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: var(--texto-apoio);
+}
+
+.coluna-vazia {
+  margin: 0;
+  padding: 16px 0;
+  font-size: 14px;
+  text-align: center;
+  color: var(--texto-apoio);
+}
+
+/* O seletor no cartão só aparece onde arrastar não funciona: no toque */
+.etapa-do-cartao {
+  display: none;
+  margin-top: 12px;
+}
+
+@media (max-width: 860px) {
+  .etapa-do-cartao {
+    display: block;
+  }
+
+  .cartao-contato {
+    cursor: default;
+  }
+}
+
+/* --- Tela que ocupa exatamente a altura da janela (hoje só o Funil) --- */
+.shell.altura-fixa {
+  height: 100vh;
+}
+
+.shell.altura-fixa .conteudo {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding-bottom: 32px;
+  overflow: hidden;
+}
+
+.shell.altura-fixa .conteudo-interno {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  /* O quadro usa a largura toda: sem o limite de 1080px das outras telas */
+  max-width: none;
+}
+
+/* Em tela estreita a faixa de navegação já rouba altura: a página volta a rolar */
+@media (max-width: 860px) {
+  .shell.altura-fixa {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .shell.altura-fixa .conteudo {
+    overflow: visible;
+  }
+
+  .kanban,
+  .cartoes {
+    overflow-y: visible;
+  }
+}
+
+/* --- Dashboard: gráfico e recentes lado a lado --- */
+.dashboard-duplo {
+  display: grid;
+  /* Não cabendo os dois, o auto-fit sozinho põe um embaixo do outro */
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  align-items: start;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.bloco {
+  padding: 24px 26px;
+}
+
+.bloco-titulo {
+  margin: 0 0 24px;
+  font-size: 17px;
+}
+
+/* --- Gráfico da distribuição por etapa --- */
+.linha-grafico {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.linha-grafico:last-child {
+  margin-bottom: 0;
+}
+
+.rotulo-grafico {
+  flex: 0 0 106px;
+  overflow: hidden;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--texto-apoio);
+}
+
+/* O trilho é o fundo da barra: mostra o quanto falta para a maior etapa */
+.trilho {
+  flex: 1;
+  min-width: 0;
+  height: 10px;
+  background: var(--fundo);
+  border-radius: var(--raio);
+}
+
+.barra {
+  height: 100%;
+  background: currentColor;
+  border-radius: var(--raio);
+}
+
+.valor-grafico {
+  flex: 0 0 24px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: right;
+}
+
+/* --- Últimos contatos cadastrados --- */
+.lista-recentes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lista-recentes li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--borda);
+}
+
+.lista-recentes li:first-child {
+  padding-top: 0;
+}
+
+.lista-recentes li:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.recente-quem {
+  min-width: 0;
+}
+
+.recente-apoio {
+  margin: 4px 0 0;
+  overflow: hidden;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--texto-apoio);
+}
+
+/* A etiqueta de etapa não encolhe quando o email é comprido */
+.lista-recentes .etiqueta {
+  flex-shrink: 0;
 }

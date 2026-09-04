@@ -4,7 +4,9 @@ import { useActionState, useEffect, useState } from "react";
 import { criarAnotacao } from "./acoes.js";
 import Anotacao from "./anotacao.js";
 
-export default function PainelAnotacoes({ contato, anotacoes }) {
+// Na lista de contatos o título diz de quem é a anotação. Na página do
+// contato o nome já está no alto da tela, então o título sai.
+export default function PainelAnotacoes({ contato, anotacoes, comTitulo = true }) {
   const [texto, setTexto] = useState("");
   const [estado, enviar, enviando] = useActionState(criarAnotacao, {});
 
@@ -14,9 +16,11 @@ export default function PainelAnotacoes({ contato, anotacoes }) {
 
   return (
     <div style={{ maxWidth: "640px" }}>
-      <h3 style={{ fontSize: "15px", marginBottom: "16px" }}>
-        Anotações de {contato.nome}
-      </h3>
+      {comTitulo && (
+        <h3 style={{ fontSize: "15px", marginBottom: "16px" }}>
+          Anotações de {contato.nome}
+        </h3>
+      )}
 
       {anotacoes.length === 0 ? (
         <p className="vazio" style={{ margin: "0 0 20px", fontSize: "15px" }}>

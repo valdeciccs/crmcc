@@ -6,9 +6,7 @@ export default function ListaEtapas({ etapas, usoDaEtapa }) {
   if (etapas.length === 0) {
     return (
       <div className="cartao vazio" style={{ padding: "28px" }}>
-        Nenhuma etapa cadastrada. Sem pelo menos uma, não dá para cadastrar contatos. Se você
-        ainda não rodou o arquivo <span className="mono">banco/04-etapas.sql</span> no Supabase,
-        é isso que está faltando.
+        Nenhuma etapa cadastrada. Sem pelo menos uma, não dá para cadastrar contatos.
       </div>
     );
   }

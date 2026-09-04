@@ -10,7 +10,7 @@ export default function PainelFunil({ contatos, etapas }) {
     <div className="painel-funil">
       <div className="painel-item">
         <p className="painel-numero">{contatos.length}</p>
-        <p className="painel-rotulo">Total de contatos</p>
+        <p className="painel-rotulo">Total</p>
       </div>
 
       {etapas.map((etapa) => (

@@ -24,41 +24,42 @@ O objetivo é responder rápido a três perguntas: com quem eu falei, em que pé
 
 Três frentes. Cada uma só está pronta quando todas as checagens abaixo passam no navegador.
 
-### 1. Kanban do funil
+### 1. Kanban do funil — concluído
 
 Ver e mover os contatos entre as etapas arrastando, em vez de trocar num seletor de lista.
 
 **PRONTO QUANDO**
 
-- [ ] Abro o Funil e vejo uma coluna por etapa, na ordem cadastrada em Etapas, cada coluna com o nome da etapa na cor dela e a quantidade de contatos no topo.
-- [ ] Cada contato aparece como um cartão dentro da coluna da etapa em que está.
-- [ ] Arrasto um cartão de uma coluna para outra, solto, e ele fica na coluna nova: aperto F5 e ele continua lá, e o Dashboard já mostra os números atualizados.
-- [ ] Crio uma etapa nova em Etapas e ela aparece como coluna no Kanban, na posição da ordem que eu dei.
-- [ ] Em tela estreita as colunas rolam de lado e ainda consigo mover um contato de etapa.
+- [x] Abro o Funil e vejo uma coluna por etapa, na ordem cadastrada em Etapas, cada coluna com o nome da etapa, um ponto na cor dela e a quantidade de contatos no topo.
+- [x] Cada contato aparece como um cartão dentro da coluna da etapa em que está.
+- [x] Arrasto um cartão de uma coluna para outra, solto, e ele fica na coluna nova: aperto F5 e ele continua lá, e o Dashboard já mostra os números atualizados.
+- [x] Crio uma etapa nova em Etapas e ela aparece como coluna no Kanban, na posição da ordem que eu dei.
+- [x] Em tela estreita as colunas rolam de lado e ainda consigo mover um contato de etapa.
 
-### 2. Página do contato
+### 2. Página do contato — concluída
 
 Tudo de um contato num lugar só, com uma busca para chegar nela rápido.
 
 **PRONTO QUANDO**
 
-- [ ] Clico no nome de um contato na lista e abro uma página só dele, com endereço próprio — copio o link, colo noutra aba e caio no mesmo contato.
-- [ ] Nessa página vejo, sem sair dela: nome, email, telefone, a etapa atual, o histórico de anotações e os follow-ups já gerados para esse contato.
-- [ ] Troco a etapa dentro da página do contato e a mudança aparece no Funil e no Dashboard.
-- [ ] Escrevo uma anotação nova ali e ela entra no histórico na hora, com data.
-- [ ] Digito parte de um nome, email ou telefone na busca e chego na página do contato sem precisar rolar a lista.
+- [x] Clico no nome de um contato na lista e abro uma página só dele, com endereço próprio — copio o link, colo noutra aba e caio no mesmo contato.
+- [x] Nessa página vejo, sem sair dela: nome, email, telefone, a etapa atual, o histórico de anotações e os follow-ups já gerados para esse contato.
+- [x] Troco a etapa dentro da página do contato e a mudança aparece no Funil e no Dashboard.
+- [x] Escrevo uma anotação nova ali e ela entra no histórico na hora, com data.
+- [x] Digito parte de um nome, email ou telefone na busca e chego na página do contato sem precisar rolar a lista.
 
-### 3. Dashboard v2
+### 3. Dashboard v2 — concluído
 
-Os números do funil apresentados como painel de sistema, com um gráfico simples da distribuição por etapa.
+Os números do funil apresentados como painel de sistema, com um gráfico simples da distribuição por etapa e os últimos cadastros.
 
 **PRONTO QUANDO**
 
-- [ ] Abro o Dashboard e vejo o total geral e um número por etapa, cada um na cor da sua etapa.
-- [ ] Vejo um gráfico simples da distribuição por etapa, em que a etapa com mais contatos é visivelmente a maior.
-- [ ] O gráfico usa as mesmas cores das etapas; crio ou apago uma etapa em Etapas e o gráfico acompanha.
-- [ ] Movo um contato de etapa, volto ao Dashboard e tanto os números quanto o gráfico já estão atualizados.
-- [ ] Sem nenhum contato cadastrado, o Dashboard mostra zeros e uma mensagem, não um gráfico quebrado.
+- [x] Abro o Dashboard e vejo o total geral e um número por etapa, cada um na cor da sua etapa.
+- [x] Vejo um gráfico simples da distribuição por etapa, em que a etapa com mais contatos é visivelmente a maior.
+- [x] O gráfico usa as mesmas cores das etapas; crio ou apago uma etapa em Etapas e o gráfico acompanha.
+- [x] Movo um contato de etapa, volto ao Dashboard e tanto os números quanto o gráfico já estão atualizados.
+- [x] Sem nenhum contato cadastrado, o Dashboard mostra zeros e uma mensagem, não um gráfico quebrado.
+- [x] Vejo os 5 contatos cadastrados mais recentemente e clico num deles para cair na página dele.
 
 ## Fora da v2 (fica pra v3)
 

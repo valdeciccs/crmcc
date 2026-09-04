@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { supabase } from "../lib/supabase.js";
 import { usuarioAtivo } from "../lib/usuarios.js";
 import { escreverFollowUp } from "../lib/ia.js";
@@ -30,5 +31,24 @@ export async function gerarFollowUp(_estadoAnterior, dadosDoFormulario) {
     (a, b) => new Date(b.criado_em) - new Date(a.criado_em)
   );
 
-  return escreverFollowUp(contato, anotacoes);
+  const resultado = await escreverFollowUp(contato, anotacoes);
+  if (resultado.erro) return resultado;
+
+  // A mensagem fica guardada com a data, para reler depois.
+  const { error: erroAoGuardar } = await supabase
+    .from("follow_ups")
+    .insert({ contato_id: contatoId, texto: resultado.mensagem });
+
+  if (erroAoGuardar) {
+    // A mensagem já está escrita: melhor entregar com um aviso do que perder.
+    console.error("Falha ao guardar follow-up:", erroAoGuardar.code, erroAoGuardar.message);
+    return {
+      ...resultado,
+      aviso: "A mensagem foi escrita, mas não deu para guardar no histórico.",
+    };
+  }
+
+  // O histórico aparece na página do contato: a tela se atualiza sozinha.
+  revalidatePath("/", "layout");
+  return resultado;
 }

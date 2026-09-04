@@ -31,7 +31,7 @@ export default async function PaginaContatos() {
       sessao={sessao}
       atual="contatos"
       titulo="Contatos"
-      apoio="Cadastre um contato novo e veja todo mundo que já está na base."
+      apoio="Cadastre um contato novo, busque quem já está na base e clique no nome para abrir a página do contato."
     >
       <FormularioContato etapas={etapas} />
 
@@ -46,7 +46,7 @@ export default async function PaginaContatos() {
           Nenhum contato cadastrado ainda.
         </div>
       ) : (
-        <ListaContatos contatos={contatos} etapas={etapas} />
+        <ListaContatos contatos={contatos} etapas={etapas} comBusca />
       )}
     </Shell>
   );

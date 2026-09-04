@@ -7,15 +7,17 @@ import { CORES_DE_ETAPA } from "../lib/constantes.js";
 
 const SEM_ACESSO = "Seu acesso não está mais ativo. Entre de novo.";
 
-// O motivo real (código do banco, tabela faltando) vai para o terminal do
-// servidor. Na tela vai uma frase que diz o que fazer.
+// O motivo real (código do banco, tabela faltando, nome do arquivo de
+// migração) vai SÓ para o terminal do servidor. Na tela vai uma frase neutra:
+// quem usa o sistema não precisa — nem deve — saber como o banco é por dentro.
 function mensagemDeFalha(error, verbo) {
   console.error(`Falha ao ${verbo} etapa:`, error.code, error.message);
 
-  // Enquanto o banco/04-etapas.sql não for rodado, a tabela não existe e
-  // nada do cadastro de etapas funciona. Melhor dizer isso do que "tente de novo".
   if (error.code === "PGRST205") {
-    return "A tabela de etapas ainda não existe no banco. Rode o arquivo banco/04-etapas.sql no Supabase e recarregue a página.";
+    console.error(
+      "A tabela 'etapas' não existe. Rode banco/04-etapas.sql no painel do Supabase."
+    );
+    return "O cadastro de etapas está indisponível no momento. Avise quem administra o sistema.";
   }
 
   return `Não foi possível ${verbo} a etapa. Tente de novo.`;

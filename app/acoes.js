@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { supabase } from "../lib/supabase.js";
 import { normalizarTelefone } from "../lib/telefone.js";
 import { usuarioAtivo } from "../lib/usuarios.js";
+import { listarEtapas } from "../lib/etapas.js";
 
 const SEM_ACESSO = "Seu acesso não está mais ativo. Entre de novo.";
 
@@ -39,15 +40,23 @@ function validar({ nome, email, telefone }) {
   return erros;
 }
 
-// Recebe o formulário, valida, grava no banco e manda a lista se atualizar.
+// Recebe o formulário, valida, grava no banco e manda as telas se atualizarem.
 export async function criarContato(_estadoAnterior, dadosDoFormulario) {
   if (!(await usuarioAtivo())) return { erros: { geral: SEM_ACESSO } };
 
   const nome = (dadosDoFormulario.get("nome") || "").trim();
   const email = (dadosDoFormulario.get("email") || "").trim();
   const telefone = (dadosDoFormulario.get("telefone") || "").trim();
+  const etapa = (dadosDoFormulario.get("etapa") || "").trim();
 
   const erros = validar({ nome, email, telefone });
+
+  // A etapa é conferida contra a tabela: o que não está cadastrado não passa.
+  const etapas = await listarEtapas();
+  if (!etapas.some((cadastrada) => cadastrada.nome === etapa)) {
+    erros.etapa = "Escolha uma das etapas cadastradas.";
+  }
+
   if (Object.keys(erros).length > 0) {
     return { erros };
   }
@@ -56,13 +65,42 @@ export async function criarContato(_estadoAnterior, dadosDoFormulario) {
     nome,
     email: email || null,
     telefone: telefone ? normalizarTelefone(telefone) : null,
+    etapa,
   });
 
   if (error) {
     return { erros: { geral: "Não foi possível salvar o contato. Tente de novo." } };
   }
 
-  revalidatePath("/");
+  // A lista aparece em Contatos e no Funil, e os números no Dashboard.
+  // Uma chamada só mantém as três telas em dia.
+  revalidatePath("/", "layout");
+  return { salvo: Date.now() };
+}
+
+// Move um contato de etapa. É o seletor que fica em cada linha da lista.
+export async function mudarEtapaContato(_estadoAnterior, dadosDoFormulario) {
+  if (!(await usuarioAtivo())) return { erro: SEM_ACESSO };
+
+  const id = Number(dadosDoFormulario.get("id"));
+  const etapa = (dadosDoFormulario.get("etapa") || "").trim();
+
+  if (!id) {
+    return { erro: "Contato não identificado. Recarregue a página." };
+  }
+
+  const etapas = await listarEtapas();
+  if (!etapas.some((cadastrada) => cadastrada.nome === etapa)) {
+    return { erro: "Essa etapa não existe mais. Recarregue a página." };
+  }
+
+  const { error } = await supabase.from("contatos").update({ etapa }).eq("id", id);
+
+  if (error) {
+    return { erro: "Não foi possível mudar a etapa. Tente de novo." };
+  }
+
+  revalidatePath("/", "layout");
   return { salvo: Date.now() };
 }
 
@@ -91,7 +129,7 @@ export async function criarAnotacao(_estadoAnterior, dadosDoFormulario) {
     return { erro: "Não foi possível salvar a anotação. Tente de novo." };
   }
 
-  revalidatePath("/");
+  revalidatePath("/", "layout");
   return { salvo: Date.now() };
 }
 
@@ -118,7 +156,7 @@ export async function editarAnotacao(_estadoAnterior, dadosDoFormulario) {
     return { erro: "Não foi possível salvar a alteração. Tente de novo." };
   }
 
-  revalidatePath("/");
+  revalidatePath("/", "layout");
   return { salvo: Date.now() };
 }
 
@@ -138,6 +176,6 @@ export async function excluirAnotacao(_estadoAnterior, dadosDoFormulario) {
     return { erro: "Não foi possível excluir a anotação. Tente de novo." };
   }
 
-  revalidatePath("/");
+  revalidatePath("/", "layout");
   return { excluido: Date.now() };
 }

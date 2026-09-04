@@ -4,10 +4,12 @@ import { useActionState, useEffect, useState } from "react";
 import { criarContato } from "./acoes.js";
 import { aplicarMascaraTelefone } from "../lib/telefone.js";
 
-export default function FormularioContato() {
+export default function FormularioContato({ etapas }) {
+  const primeiraEtapa = etapas[0]?.nome || "";
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [telefone, setTelefone] = useState("");
+  const [etapa, setEtapa] = useState(primeiraEtapa);
   const [estado, enviar, enviando] = useActionState(criarContato, {});
 
   // Campos mexidos depois do último envio: o aviso some assim que a pessoa corrige.
@@ -21,6 +23,7 @@ export default function FormularioContato() {
       setNome("");
       setEmail("");
       setTelefone("");
+      setEtapa(primeiraEtapa);
     }
   }, [estado]);
 
@@ -36,7 +39,12 @@ export default function FormularioContato() {
   const mudarTelefone = aoDigitar("telefone", setTelefone);
 
   return (
-    <form action={enviar} noValidate className="cartao" style={{ padding: "28px" }}>
+    <form
+      action={enviar}
+      noValidate
+      className="cartao"
+      style={{ padding: "28px", maxWidth: "760px" }}
+    >
       <h2 style={{ fontSize: "18px", marginBottom: "22px" }}>Novo contato</h2>
 
       <div
@@ -100,13 +108,45 @@ export default function FormularioContato() {
         </div>
       </div>
 
+      <div style={{ marginTop: "18px", maxWidth: "240px" }}>
+        <label className="rotulo" htmlFor="etapa">
+          Etapa
+        </label>
+        <select
+          className={`campo ${estado.erros?.etapa ? "campo-invalido" : ""}`}
+          id="etapa"
+          name="etapa"
+          value={etapa}
+          disabled={etapas.length === 0}
+          onChange={(e) => setEtapa(e.target.value)}
+        >
+          {etapas.map((opcao) => (
+            <option key={opcao.id} value={opcao.nome}>
+              {opcao.nome}
+            </option>
+          ))}
+        </select>
+        {estado.erros?.etapa && <p className="erro-campo">{estado.erros.etapa}</p>}
+      </div>
+
+      {etapas.length === 0 && (
+        <p className="aviso-erro" style={{ margin: "20px 0 0" }}>
+          Nenhuma etapa cadastrada. Crie uma na tela Etapas antes de cadastrar contatos.
+        </p>
+      )}
+
       {estado.erros?.geral && (
         <p className="aviso-erro" style={{ margin: "20px 0 0" }}>
           {estado.erros.geral}
         </p>
       )}
 
-      <button className="botao" type="submit" disabled={enviando} style={{ marginTop: "24px" }}>
+      <button
+        className="botao"
+        type="submit"
+        disabled={enviando || etapas.length === 0}
+        style={{ marginTop: "24px" }}
+      >
         {enviando ? "Salvando..." : "Salvar contato"}
       </button>
     </form>

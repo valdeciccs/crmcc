@@ -34,7 +34,7 @@ export default function LinhaUsuario({ usuario, souEu }) {
           {usuario.situacao}
         </span>
       </td>
-      <td className="vazio">{formatarDataHora(usuario.criado_em)}</td>
+      <td className="vazio mono">{formatarDataHora(usuario.criado_em)}</td>
       <td>
         {souEu ? (
           <span className="vazio">—</span>

@@ -3,15 +3,9 @@
 import { Fragment, useState } from "react";
 import PainelAnotacoes from "./painel-anotacoes.js";
 import FollowUp from "./follow-up.js";
+import SeletorEtapa from "./seletor-etapa.js";
 
-const CLASSE_DA_ETAPA = {
-  novo: "etiqueta-novo",
-  "em contato": "etiqueta-em-contato",
-  proposta: "etiqueta-proposta",
-  cliente: "etiqueta-cliente",
-};
-
-export default function ListaContatos({ contatos }) {
+export default function ListaContatos({ contatos, etapas }) {
   // Qual linha está aberta e o que ela mostra: "anotacoes" ou "followup".
   const [aberto, setAberto] = useState(null);
 
@@ -44,13 +38,11 @@ export default function ListaContatos({ contatos }) {
                   <td className={contato.email ? undefined : "vazio"}>
                     {contato.email || "—"}
                   </td>
-                  <td className={contato.telefone ? undefined : "vazio"}>
+                  <td className={contato.telefone ? "mono" : "vazio"}>
                     {contato.telefone || "—"}
                   </td>
                   <td>
-                    <span className={`etiqueta ${CLASSE_DA_ETAPA[contato.etapa]}`}>
-                      {contato.etapa}
-                    </span>
+                    <SeletorEtapa contato={contato} etapas={etapas} />
                   </td>
                   <td>
                     <button
@@ -59,7 +51,13 @@ export default function ListaContatos({ contatos }) {
                       aria-expanded={modoAberto === "anotacoes"}
                       onClick={() => alternar(contato.id, "anotacoes")}
                     >
-                      {modoAberto === "anotacoes" ? "Fechar" : `Ver (${anotacoes.length})`}
+                      {modoAberto === "anotacoes" ? (
+                        "Fechar"
+                      ) : (
+                        <>
+                          Ver <span className="mono">({anotacoes.length})</span>
+                        </>
+                      )}
                     </button>
                   </td>
                   <td>

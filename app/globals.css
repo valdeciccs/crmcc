@@ -1,0 +1,468 @@
+/* Tokens da identidade visual — ver design.md */
+:root {
+  --fundo: #FAFAF7;
+  --superficie: #FFFFFF;
+  --borda: #E6E4DE;
+  --texto: #17181C;
+  --texto-apoio: #6B6E76;
+  --destaque: #1D4ED8;
+  --destaque-hover: #1E40AF;
+  --erro: #B42318;
+
+  --etapa-novo: #64748B;
+  --etapa-em-contato: #D97706;
+  --etapa-proposta: #7C3AED;
+  --etapa-cliente: #15803D;
+
+  --raio: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: var(--fonte-manrope), system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0;
+}
+
+a {
+  color: var(--destaque);
+}
+
+a:hover {
+  color: var(--destaque-hover);
+}
+
+/* --- Blocos reutilizáveis --- */
+
+.cartao {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+}
+
+.rotulo {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.campo {
+  width: 100%;
+  padding: 11px 14px;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--texto);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+}
+
+.campo:focus {
+  outline: none;
+  border-color: var(--destaque);
+}
+
+.botao {
+  padding: 12px 22px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--superficie);
+  background: var(--destaque);
+  border: 1px solid var(--destaque);
+  border-radius: var(--raio);
+  cursor: pointer;
+}
+
+.botao:hover {
+  background: var(--destaque-hover);
+  border-color: var(--destaque-hover);
+}
+
+.botao:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.aviso-erro {
+  padding: 12px 14px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--erro);
+  background: var(--superficie);
+  border: 1px solid var(--erro);
+  border-radius: var(--raio);
+}
+
+/* Etiquetas de etapa do funil — único lugar com as cores das etapas */
+.etiqueta {
+  display: inline-block;
+  padding: 3px 10px;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  border: 1px solid;
+  border-radius: var(--raio);
+}
+
+.etiqueta-novo {
+  color: var(--etapa-novo);
+  border-color: var(--etapa-novo);
+}
+
+.etiqueta-em-contato {
+  color: var(--etapa-em-contato);
+  border-color: var(--etapa-em-contato);
+}
+
+.etiqueta-proposta {
+  color: var(--etapa-proposta);
+  border-color: var(--etapa-proposta);
+}
+
+.etiqueta-cliente {
+  color: var(--etapa-cliente);
+  border-color: var(--etapa-cliente);
+}
+
+/* Tabela de contatos */
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabela th {
+  padding: 14px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: left;
+  color: var(--texto-apoio);
+  border-bottom: 1px solid var(--borda);
+}
+
+.tabela td {
+  padding: 16px 20px;
+  font-size: 15px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.tabela tr:last-child td {
+  border-bottom: none;
+}
+
+.vazio {
+  color: var(--texto-apoio);
+}
+
+.campo::placeholder {
+  color: var(--texto-apoio);
+  opacity: 1;
+}
+
+.campo-invalido,
+.campo-invalido:focus {
+  border-color: var(--erro);
+}
+
+.erro-campo {
+  margin: 6px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--erro);
+}
+
+/* Botão discreto, para ações dentro da lista */
+.botao-texto {
+  padding: 0;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--destaque);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.botao-texto:hover {
+  color: var(--destaque-hover);
+  text-decoration: underline;
+}
+
+/* Painel de anotações que abre embaixo da linha do contato */
+.linha-aberta {
+  padding: 28px 20px;
+  background: var(--fundo);
+}
+
+.campo-texto {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.lista-anotacoes {
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  background: var(--superficie);
+}
+
+.lista-anotacoes li {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.lista-anotacoes li:last-child {
+  border-bottom: none;
+}
+
+.data-anotacao {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--texto-apoio);
+}
+
+.texto-anotacao {
+  margin: 0;
+  font-size: 15px;
+  white-space: pre-wrap;
+}
+
+/* Cabeçalho de cada anotação: data de um lado, ações do outro */
+.cabecalho-anotacao {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 6px;
+}
+
+.acoes-anotacao {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.botao-texto.perigo {
+  color: var(--texto-apoio);
+}
+
+.botao-texto.perigo:hover {
+  color: var(--erro);
+}
+
+.botao-pequeno {
+  padding: 8px 16px;
+  font-size: 15px;
+}
+
+.botao-perigo {
+  background: var(--erro);
+  border-color: var(--erro);
+}
+
+.botao-perigo:hover {
+  background: #8F1D13;
+  border-color: #8F1D13;
+}
+
+.confirmacao {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 14px;
+  padding: 14px 16px;
+  font-size: 15px;
+  color: var(--texto);
+  background: var(--fundo);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+}
+
+/* Topo da página: título de um lado, sair do outro */
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* --- Barra de navegação das telas internas --- */
+.navbar {
+  background: var(--superficie);
+  border-bottom: 1px solid var(--borda);
+}
+
+.navbar-conteudo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px 24px;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.navbar-marca {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.navbar-link {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--texto-apoio);
+  text-decoration: none;
+}
+
+.navbar-link:hover {
+  color: var(--texto);
+}
+
+.navbar-link.ativo {
+  color: var(--destaque);
+}
+
+.navbar-quem {
+  font-size: 15px;
+  color: var(--texto-apoio);
+}
+
+/* Link entre as telas de entrar e criar conta */
+.link-alternativo {
+  margin: 20px 0 0;
+  font-size: 15px;
+  text-align: center;
+  color: var(--texto-apoio);
+}
+
+/* Etiquetas de situação do usuário — sem usar as cores do funil */
+.etiqueta-pendente {
+  color: var(--texto-apoio);
+  border-color: var(--texto-apoio);
+}
+
+.etiqueta-aprovado {
+  color: var(--texto);
+  border-color: var(--texto);
+}
+
+.etiqueta-recusado {
+  color: var(--erro);
+  border-color: var(--erro);
+}
+
+/* Follow-up escrito pela IA */
+.bloco-followup {
+  max-width: 640px;
+}
+
+.escrevendo {
+  margin: 12px 0 0;
+  font-size: 15px;
+  color: var(--texto-apoio);
+}
+
+.mensagem-ia {
+  margin-top: 14px;
+  padding: 18px;
+}
+
+.mensagem-ia .botao-texto {
+  margin-top: 14px;
+}
+
+/* Painel com os números do funil */
+.painel-funil {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  margin-bottom: 40px;
+}
+
+.painel-item {
+  padding: 24px 28px;
+  border-right: 1px solid var(--borda);
+}
+
+.painel-item:last-child {
+  border-right: none;
+}
+
+.painel-numero {
+  margin: 0;
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.painel-rotulo {
+  margin: 6px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--texto-apoio);
+}
+
+/* As cores das etapas, aqui nos números do funil */
+.numero-novo {
+  color: var(--etapa-novo);
+}
+
+.numero-em-contato {
+  color: var(--etapa-em-contato);
+}
+
+.numero-proposta {
+  color: var(--etapa-proposta);
+}
+
+.numero-cliente {
+  color: var(--etapa-cliente);
+}
+
+/* Em telas estreitas as divisórias viram horizontais */
+@media (max-width: 640px) {
+  .painel-item {
+    border-right: none;
+    border-bottom: 1px solid var(--borda);
+  }
+
+  .painel-item:last-child {
+    border-bottom: none;
+  }
+}

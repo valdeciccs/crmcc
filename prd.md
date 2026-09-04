@@ -32,8 +32,7 @@ Ver e mover os contatos entre as etapas arrastando, em vez de trocar num seletor
 
 - [ ] Abro o Funil e vejo uma coluna por etapa, na ordem cadastrada em Etapas, cada coluna com o nome da etapa na cor dela e a quantidade de contatos no topo.
 - [ ] Cada contato aparece como um cartão dentro da coluna da etapa em que está.
-- [ ] Arrasto um cartão de uma coluna para outra, solto, e ele fica na coluna nova; aperto F5 e ele continua lá.
-- [ ] Depois de arrastar, abro o Dashboard e os números já estão atualizados, sem eu fazer mais nada.
+- [ ] Arrasto um cartão de uma coluna para outra, solto, e ele fica na coluna nova: aperto F5 e ele continua lá, e o Dashboard já mostra os números atualizados.
 - [ ] Crio uma etapa nova em Etapas e ela aparece como coluna no Kanban, na posição da ordem que eu dei.
 - [ ] Em tela estreita as colunas rolam de lado e ainda consigo mover um contato de etapa.
 
